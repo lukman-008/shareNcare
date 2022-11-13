@@ -1,27 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/dashboard.dart';
-import 'package:flutter_application_1/signup.dart';
-import 'package:flutter_application_1/splash.dart';
+import 'package:flutter_application_1/main.dart';
 import 'package:lottie/lottie.dart';
 
-void main() {
-  runApp(MaterialApp(
-    title: "TechPath",
-    debugShowCheckedModeBanner: false,
-    routes: {
-      "/": ((context) => splashScreen()),
-    },
-  ));
-}
-
-class homepage extends StatefulWidget {
-  const homepage({super.key});
+class signup extends StatefulWidget {
+  const signup({super.key});
 
   @override
-  State<homepage> createState() => _homepageState();
+  State<signup> createState() => _signupState();
 }
 
-class _homepageState extends State<homepage> {
+class _signupState extends State<signup> {
   final formkey = GlobalKey<FormState>();
   final TextEditingController emailController = new TextEditingController();
   final TextEditingController passwordController = new TextEditingController();
@@ -87,6 +76,35 @@ class _homepageState extends State<homepage> {
         autofocus: false,
       ),
     );
+
+    final ConfirmpasswordField = Container(
+      decoration: BoxDecoration(
+        boxShadow: [BoxShadow(blurRadius: 20, color: Colors.white)],
+      ),
+      child: TextFormField(
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        validator: (value) {
+          RegExp regex = new RegExp(r'^.{6,}$');
+          if (value!.isEmpty) {
+            return ("Please Enter your Password");
+          }
+          if (!regex.hasMatch(value)) {
+            return ("Please Enter Valid Password Min. of 6 charater ");
+          }
+        },
+        obscureText: true,
+        decoration: InputDecoration(
+            prefixIcon: Icon(Icons.key),
+            labelText: "Confirm Password",
+            labelStyle: TextStyle(fontWeight: FontWeight.bold),
+            fillColor: Colors.white,
+            filled: true,
+            border:
+                OutlineInputBorder(borderRadius: BorderRadius.circular(10))),
+        autofocus: false,
+      ),
+    );
+
     final button = Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -96,14 +114,11 @@ class _homepageState extends State<homepage> {
         borderRadius: BorderRadius.circular(30),
       ),
       child: MaterialButton(
-        onPressed: () {
-          Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => dashboard()));
-        },
+        onPressed: () {},
         hoverColor: Colors.black,
         padding: EdgeInsets.fromLTRB(70, 15, 70, 15),
         child: Text(
-          "LogIn",
+          "SignUp",
           style: TextStyle(
               fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
         ),
@@ -136,7 +151,7 @@ class _homepageState extends State<homepage> {
                     SizedBox(
                       height: 40,
                       child: Text(
-                        "LOGIN",
+                        "SIGNUP",
                         style: TextStyle(
                             fontSize: 26, fontWeight: FontWeight.bold),
                       ),
@@ -149,20 +164,13 @@ class _homepageState extends State<homepage> {
                     ),
                     emailField,
                     SizedBox(
-                      height: 30,
+                      height: 10,
                     ),
                     passwordField,
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        TextButton(
-                            onPressed: (() {}),
-                            child: Text(
-                              "Forget Password?",
-                              style: TextStyle(color: Colors.black),
-                            ))
-                      ],
+                    SizedBox(
+                      height: 10,
                     ),
+                    ConfirmpasswordField,
                     SizedBox(
                       height: 8,
                     ),
@@ -174,14 +182,14 @@ class _homepageState extends State<homepage> {
                       children: [
                         Text("OR"),
                         TextButton(
-                            onPressed: () {
+                            onPressed: ((() {
                               Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => signup()));
-                            },
+                                      builder: ((context) => homepage())));
+                            })),
                             child: Text(
-                              "SignUp",
+                              "LogIn",
                               style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 15,

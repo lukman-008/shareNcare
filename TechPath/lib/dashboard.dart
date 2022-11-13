@@ -59,7 +59,6 @@ class _dashboardState extends State<dashboard> {
                   ),
                 ),
               ),
-
               //2nd Image of Slider
               Container(
                 margin: EdgeInsets.all(10.0),
