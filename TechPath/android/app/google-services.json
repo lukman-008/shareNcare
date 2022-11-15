@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "715417693769",
+    "project_id": "techpath-a790c",
+    "storage_bucket": "techpath-a790c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:715417693769:android:039925fcc725546f705998",
+        "android_client_info": {
+          "package_name": "com.example.flutter_application_1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "715417693769-nh8e5pqkh1g2f7f338dkajnjtpm3kdd0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAYAu-rSf7Pzlmg-2Iu6DN8ICwofHcE_wk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "715417693769-nh8e5pqkh1g2f7f338dkajnjtpm3kdd0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

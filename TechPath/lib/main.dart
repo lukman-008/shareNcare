@@ -1,10 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/dashboard.dart';
 import 'package:flutter_application_1/signup.dart';
 import 'package:flutter_application_1/splash.dart';
 import 'package:lottie/lottie.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MaterialApp(
     title: "TechPath",
     debugShowCheckedModeBanner: false,
@@ -16,6 +20,10 @@ void main() {
 
 class homepage extends StatefulWidget {
   const homepage({super.key});
+  Future<FirebaseApp> _initializeFirebase() async {
+    FirebaseApp firebaseApp = await Firebase.initializeApp();
+    return firebaseApp;
+  }
 
   @override
   State<homepage> createState() => _homepageState();
@@ -27,11 +35,16 @@ class _homepageState extends State<homepage> {
   final TextEditingController passwordController = new TextEditingController();
   @override
   Widget build(BuildContext context) {
+    String email = '';
+    String password = '';
     final emailField = Container(
       decoration: BoxDecoration(
         boxShadow: [BoxShadow(blurRadius: 20, color: Colors.white)],
       ),
       child: TextFormField(
+        onChanged: (value) {
+          email = value;
+        },
         autovalidateMode: AutovalidateMode.onUserInteraction,
         keyboardType: TextInputType.emailAddress,
         controller: emailController,
@@ -65,6 +78,9 @@ class _homepageState extends State<homepage> {
         boxShadow: [BoxShadow(blurRadius: 20, color: Colors.white)],
       ),
       child: TextFormField(
+        onChanged: ((value) {
+          password = value;
+        }),
         autovalidateMode: AutovalidateMode.onUserInteraction,
         validator: (value) {
           RegExp regex = new RegExp(r'^.{6,}$');
@@ -97,8 +113,21 @@ class _homepageState extends State<homepage> {
       ),
       child: MaterialButton(
         onPressed: () {
-          Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => dashboard()));
+          onPressed:
+          () async {
+            try {
+              UserCredential userCredential = await FirebaseAuth.instance
+                  .signInWithEmailAndPassword(email: email, password: password);
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => dashboard()));
+            } on FirebaseAuthException catch (e) {
+              if (e.code == 'user-not-found') {
+                print('No user found for that email.');
+              } else if (e.code == 'wrong-password') {
+                print('Wrong password provided for that user.');
+              }
+            }
+          };
         },
         hoverColor: Colors.black,
         padding: EdgeInsets.fromLTRB(70, 15, 70, 15),
@@ -167,26 +196,34 @@ class _homepageState extends State<homepage> {
                       height: 8,
                     ),
                     button,
-                    SizedBox(
-                      height: 8,
-                    ),
                     Column(
                       children: [
-                        Text("OR"),
-                        TextButton(
-                            onPressed: () {
-                              Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => signup()));
-                            },
-                            child: Text(
-                              "SignUp",
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold),
-                            )),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              "Not a member?",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            TextButton(
+                                onPressed: () {
+                                  Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => signup()));
+                                },
+                                child: Text(
+                                  "SignUp",
+                                  style: TextStyle(
+                                      color: Color.fromARGB(255, 13, 80, 136),
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold),
+                                )),
+                          ],
+                        ),
                       ],
                     )
                   ],

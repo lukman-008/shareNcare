@@ -1,10 +1,17 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/dashboard.dart';
 import 'package:flutter_application_1/main.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lottie/lottie.dart';
 
 class signup extends StatefulWidget {
   const signup({super.key});
+  Future<FirebaseApp> _initializeFirebase() async {
+    FirebaseApp firebaseApp = await Firebase.initializeApp();
+    return firebaseApp;
+  }
 
   @override
   State<signup> createState() => _signupState();
@@ -16,11 +23,16 @@ class _signupState extends State<signup> {
   final TextEditingController passwordController = new TextEditingController();
   @override
   Widget build(BuildContext context) {
+    String email = '';
+    String password = '';
     final emailField = Container(
       decoration: BoxDecoration(
         boxShadow: [BoxShadow(blurRadius: 20, color: Colors.white)],
       ),
       child: TextFormField(
+        onChanged: (value) {
+          email = value;
+        },
         autovalidateMode: AutovalidateMode.onUserInteraction,
         keyboardType: TextInputType.emailAddress,
         controller: emailController,
@@ -54,6 +66,9 @@ class _signupState extends State<signup> {
         boxShadow: [BoxShadow(blurRadius: 20, color: Colors.white)],
       ),
       child: TextFormField(
+        onChanged: (value) {
+          password = value;
+        },
         autovalidateMode: AutovalidateMode.onUserInteraction,
         validator: (value) {
           RegExp regex = new RegExp(r'^.{6,}$');
@@ -114,7 +129,27 @@ class _signupState extends State<signup> {
         borderRadius: BorderRadius.circular(30),
       ),
       child: MaterialButton(
-        onPressed: () {},
+        onPressed: () async {
+          try {
+            UserCredential userCredential = await FirebaseAuth.instance
+                .createUserWithEmailAndPassword(
+                    email: email, password: password);
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: ((context) => homepage())));
+          } on FirebaseAuthException catch (e) {
+            if (e.code == 'weak-password') {
+              print('The password provided is too weak.');
+            } else if (e.code == 'email-already-in-use') {
+              print('The account already exists for that email.');
+              Fluttertoast.showToast(
+                  backgroundColor: Color.fromARGB(255, 13, 80, 136),
+                  msg: "The account already exists for that email.");
+            }
+          } catch (e) {
+            print(e);
+            Fluttertoast.showToast(msg: "hello world");
+          }
+        },
         hoverColor: Colors.black,
         padding: EdgeInsets.fromLTRB(70, 15, 70, 15),
         child: Text(
@@ -175,26 +210,31 @@ class _signupState extends State<signup> {
                       height: 8,
                     ),
                     button,
-                    SizedBox(
-                      height: 8,
-                    ),
                     Column(
                       children: [
-                        Text("OR"),
-                        TextButton(
-                            onPressed: ((() {
-                              Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: ((context) => homepage())));
-                            })),
-                            child: Text(
-                              "LogIn",
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold),
-                            )),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text("Already a member?"),
+                            TextButton(
+                                onPressed: ((() {
+                                  Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: ((context) => homepage())));
+                                })),
+                                child: Text(
+                                  "LogIn",
+                                  style: TextStyle(
+                                      color: Color.fromARGB(255, 13, 80, 136),
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold),
+                                )),
+                          ],
+                        ),
                       ],
                     )
                   ],

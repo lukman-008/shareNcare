@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/New.dart';
 import 'package:flutter_application_1/main.dart';
 
 class dashboard extends StatefulWidget {
@@ -86,7 +87,7 @@ class _dashboardState extends State<dashboard> {
                 child: ListTile(
                   onTap: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: ((context) => homepage())));
+                        MaterialPageRoute(builder: ((context) => first())));
                   },
                 ),
               ),
