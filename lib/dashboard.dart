@@ -4,6 +4,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
+import 'package:flutter_application_1/new.dart';
 
 class dashboard extends StatefulWidget {
   const dashboard({super.key});
@@ -33,7 +34,7 @@ class _dashboardState extends State<dashboard> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text("TechPath"),
+        title: Text("ShareNCare"),
         flexibleSpace: Container(
           decoration: BoxDecoration(
             boxShadow: [BoxShadow(blurRadius: 20, color: Colors.black)],
@@ -56,7 +57,7 @@ class _dashboardState extends State<dashboard> {
                   boxShadow: [BoxShadow(blurRadius: 20, color: Colors.black)],
                   borderRadius: BorderRadius.circular(8.0),
                   image: DecorationImage(
-                    image: AssetImage('assets/techlogo.png'),
+                    image: AssetImage('assets/snc.png'),
                     fit: BoxFit.fill,
                   ),
                 ),
@@ -68,7 +69,7 @@ class _dashboardState extends State<dashboard> {
                   boxShadow: [BoxShadow(blurRadius: 20, color: Colors.black)],
                   borderRadius: BorderRadius.circular(8.0),
                   image: DecorationImage(
-                    image: AssetImage('assets/cheap.jpg'),
+                    image: AssetImage('assets/food waste.png'),
                     fit: BoxFit.fill,
                   ),
                 ),
@@ -81,14 +82,14 @@ class _dashboardState extends State<dashboard> {
                   boxShadow: [BoxShadow(blurRadius: 20, color: Colors.black)],
                   borderRadius: BorderRadius.circular(8.0),
                   image: DecorationImage(
-                    image: AssetImage('assets/carr.jpg'),
+                    image: AssetImage('assets/donateit.jpg'),
                     fit: BoxFit.fill,
                   ),
                 ),
                 child: ListTile(
                   onTap: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: ((context) => homepage())));
+                        MaterialPageRoute(builder: ((context) => first())));
                   },
                 ),
               ),
@@ -100,7 +101,7 @@ class _dashboardState extends State<dashboard> {
                   boxShadow: [BoxShadow(blurRadius: 20, color: Colors.black)],
                   borderRadius: BorderRadius.circular(8.0),
                   image: DecorationImage(
-                    image: AssetImage('assets/code.jpg'),
+                    image: AssetImage('assets/book.png'),
                     fit: BoxFit.fill,
                   ),
                 ),
@@ -113,7 +114,7 @@ class _dashboardState extends State<dashboard> {
                   boxShadow: [BoxShadow(blurRadius: 20, color: Colors.black)],
                   borderRadius: BorderRadius.circular(8.0),
                   image: DecorationImage(
-                    image: AssetImage('assets/exp.jpg'),
+                    image: AssetImage('assets/food waste.png'),
                     fit: BoxFit.fill,
                   ),
                 ),
@@ -135,9 +136,9 @@ class _dashboardState extends State<dashboard> {
         ],
       ),
       drawer: Drawer(
-        backgroundColor: Colors.white70,
+        backgroundColor: Colors.yellow,
         child: SizedBox(
-          height: 300,
+          height: 450,
           child: ListView(
             children: [
               DrawerHeader(
@@ -149,13 +150,13 @@ class _dashboardState extends State<dashboard> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CircleAvatar(
-                        backgroundImage: AssetImage('assets/bg1.jpg'),
-                        radius: 50,
+                        backgroundImage: AssetImage('assets/snc.png'),
+                        radius: 55,
                       ),
                       SizedBox(
                         height: 10,
                       ),
-                      Text(user.email!)
+                      Text("Email - " + user.email!)
                     ],
                   )),
               SizedBox(

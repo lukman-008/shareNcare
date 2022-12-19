@@ -17,7 +17,7 @@ class _firstState extends State<first> {
         systemOverlayStyle: SystemUiOverlayStyle(
             statusBarColor: Colors.red, statusBarBrightness: Brightness.light),
         centerTitle: true,
-        title: Text("Astra"),
+        title: Text("ShareNCare"),
         flexibleSpace: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(colors: [Colors.blue, Colors.red]),
