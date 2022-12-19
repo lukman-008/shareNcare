@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/dashboard.dart';
 import 'package:flutter_application_1/signup.dart';
 import 'package:flutter_application_1/splash.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lottie/lottie.dart';
 
 void main() async {
@@ -30,7 +31,30 @@ class homepage extends StatefulWidget {
 }
 
 class _homepageState extends State<homepage> {
+  static Future<User?> loginUsingEmailPassword(
+      {required String email,
+      required String password,
+      required BuildContext context}) async {
+    FirebaseAuth auth = FirebaseAuth.instance;
+    User? user;
+    try {
+      UserCredential userCredential = await auth.signInWithEmailAndPassword(
+          email: email, password: password);
+      user = userCredential.user;
+    } on FirebaseAuthException catch (e) {
+      Fluttertoast.showToast(msg: "INVALID EMAIL OR PASSWORD");
+    }
+    return user;
+  }
   final formkey = GlobalKey<FormState>();
+  checkvalidation(GlobalKey<FormState> formkey) {
+    if (formkey.currentState!.validate()) {
+      print('VALIDATED');
+    } else {
+      print('NOT VALIDATED');
+    }
+  }
+
   final TextEditingController emailController = new TextEditingController();
   final TextEditingController passwordController = new TextEditingController();
   @override
@@ -112,22 +136,15 @@ class _homepageState extends State<homepage> {
         borderRadius: BorderRadius.circular(30),
       ),
       child: MaterialButton(
-        onPressed: () {
-          onPressed:
-          () async {
-            try {
-              UserCredential userCredential = await FirebaseAuth.instance
-                  .signInWithEmailAndPassword(email: email, password: password);
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) => dashboard()));
-            } on FirebaseAuthException catch (e) {
-              if (e.code == 'user-not-found') {
-                print('No user found for that email.');
-              } else if (e.code == 'wrong-password') {
-                print('Wrong password provided for that user.');
-              }
-            }
-          };
+        onPressed: () async {
+          checkvalidation(formkey);
+          User? user = await loginUsingEmailPassword(
+              email: email, password: password, context: context);
+          print(user);
+          if (user != null) {
+            Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => dashboard()));
+          }
         },
         hoverColor: Colors.black,
         padding: EdgeInsets.fromLTRB(70, 15, 70, 15),
@@ -157,78 +174,80 @@ class _homepageState extends State<homepage> {
                     Color.fromARGB(255, 3, 168, 244)
                   ])),
               child: Form(
+                  key: formkey,
                   child: SingleChildScrollView(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    SizedBox(
-                      height: 40,
-                      child: Text(
-                        "LOGIN",
-                        style: TextStyle(
-                            fontSize: 26, fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                    Container(
-                      height: 150,
-                      width: 250,
-                      child: Lottie.network(
-                          "https://assets8.lottiefiles.com/packages/lf20_jcikwtux.json"),
-                    ),
-                    emailField,
-                    SizedBox(
-                      height: 30,
-                    ),
-                    passwordField,
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        TextButton(
-                            onPressed: (() {}),
-                            child: Text(
-                              "Forget Password?",
-                              style: TextStyle(color: Colors.black),
-                            ))
-                      ],
-                    ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    button,
-                    Column(
-                      children: [
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        SizedBox(
+                          height: 40,
+                          child: Text(
+                            "LOGIN",
+                            style: TextStyle(
+                                fontSize: 26, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        Container(
+                          height: 150,
+                          width: 250,
+                          child: Lottie.network(
+                              "https://assets8.lottiefiles.com/packages/lf20_jcikwtux.json"),
+                        ),
+                        emailField,
+                        SizedBox(
+                          height: 30,
+                        ),
+                        passwordField,
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Text(
-                              "Not a member?",
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
                             TextButton(
-                                onPressed: () {
-                                  Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => signup()));
-                                },
+                                onPressed: (() {}),
                                 child: Text(
-                                  "SignUp",
-                                  style: TextStyle(
-                                      color: Color.fromARGB(255, 13, 80, 136),
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold),
-                                )),
+                                  "Forget Password?",
+                                  style: TextStyle(color: Colors.black),
+                                ))
                           ],
                         ),
+                        SizedBox(
+                          height: 8,
+                        ),
+                        button,
+                        Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  "Not a member?",
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                                TextButton(
+                                    onPressed: () {
+                                      Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => signup()));
+                                    },
+                                    child: Text(
+                                      "SignUp",
+                                      style: TextStyle(
+                                          color:
+                                              Color.fromARGB(255, 13, 80, 136),
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold),
+                                    )),
+                              ],
+                            ),
+                          ],
+                        )
                       ],
-                    )
-                  ],
-                ),
-              ))),
+                    ),
+                  ))),
         ),
       ),
     );
