@@ -11,7 +11,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(MaterialApp(
-    title: "TechPath",
+    title: "ShareNCare",
     debugShowCheckedModeBanner: false,
     routes: {
       "/": ((context) => splashScreen()),
@@ -46,6 +46,7 @@ class _homepageState extends State<homepage> {
     }
     return user;
   }
+
   final formkey = GlobalKey<FormState>();
   checkvalidation(GlobalKey<FormState> formkey) {
     if (formkey.currentState!.validate()) {
