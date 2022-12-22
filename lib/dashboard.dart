@@ -9,6 +9,8 @@ import 'package:flutter_application_1/clothes.dart';
 import 'package:flutter_application_1/food.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/help.dart';
+import 'package:flutter_application_1/money.dart';
+import 'package:flutter_application_1/ngo.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class dashboard extends StatefulWidget {
@@ -326,7 +328,7 @@ class _dashboardState extends State<dashboard> {
                   InkWell(
                     onTap: () {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => books()));
+                          MaterialPageRoute(builder: (context) => money()));
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -363,7 +365,7 @@ class _dashboardState extends State<dashboard> {
                   InkWell(
                     onTap: () {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => books()));
+                          MaterialPageRoute(builder: (context) => ngo()));
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -383,10 +385,10 @@ class _dashboardState extends State<dashboard> {
                         children: [
                           Image.asset(
                             "assets/ngos.jpg",
-                            scale: 3.5,
+                            scale: 4,
                           ),
                           SizedBox(
-                            height: 10,
+                            height: 5,
                           ),
                           Text(
                             "N.G.Os",

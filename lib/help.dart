@@ -13,11 +13,11 @@ class help extends StatefulWidget {
 
 class _helpState extends State<help> {
   static final data1 =
-      'follow the steps : login > go to meeting section > write your channel name > join as auidence';
+      'follow the steps : \n-> After login \n-> go to Foods/Clothes/Books section \n-> Add Details and Description  ';
   static final data2 =
-      'Yes ,admin  can schedule meetings as well as institutes can join broadcast as audience.';
+      '-> Go to N.G.Os section to see Different fellow Organization';
   static final data3 =
-      'No,there is a seperate segment to join a meeting which is scheduled.';
+      '-> Add Total Money want to Donate. \n-> Must add Figure in Rupees,\n-> Now send Money on QR provided, \n-> Add your Transaction Id.';
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -48,13 +48,13 @@ class _helpState extends State<help> {
             body: ListView(
               children: [
                 buildCard(
-                  'How to fill form for doanting foods/Clothes/Books? ',
+                  'How to fill form for donating foods/Clothes/Books? ',
                 ),
                 buildCard1(
                   'Where to See Fellow Organization and NGOs ? ',
                 ),
                 buildCard3(
-                  'Can i join meeting to the app itself or use third party app ? ',
+                  'How to Donate Money?',
                 ),
               ],
             ),
@@ -106,7 +106,7 @@ class _helpState extends State<help> {
                   fontSize: 18,
                 ),
                 softWrap: true,
-                maxLines: 2,
+                maxLines: 4,
                 overflow: TextOverflow.ellipsis,
               ),
               expanded: Text(
@@ -160,7 +160,7 @@ class _helpState extends State<help> {
                   fontSize: 18,
                 ),
                 softWrap: true,
-                maxLines: 2,
+                maxLines: 4,
                 overflow: TextOverflow.ellipsis,
               ),
               expanded: Text(
@@ -214,7 +214,7 @@ class _helpState extends State<help> {
                   fontSize: 18,
                 ),
                 softWrap: true,
-                maxLines: 2,
+                maxLines: 4,
                 overflow: TextOverflow.ellipsis,
               ),
               expanded: Text(

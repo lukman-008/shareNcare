@@ -81,14 +81,14 @@ class _personalState extends State<personal> {
   Widget buildCard(String title) => Padding(
         padding: EdgeInsets.all(10),
         child: Card(
-          shadowColor: Color.fromARGB(255, 172, 172, 172),
+          shadowColor: Color.fromARGB(255, 51, 51, 51),
           elevation: 10,
           child: Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  Color.fromARGB(255, 0, 119, 255),
-                  Color.fromARGB(255, 0, 255, 242)
+                  Color.fromARGB(255, 236, 179, 221),
+                  Color.fromARGB(255, 159, 152, 202)
                 ],
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
@@ -144,14 +144,20 @@ class _personalState extends State<personal> {
           child: Column(
             children: [
               Stack(
-                children: [],
+                children: [
+                  Ink.image(
+                    image: AssetImage('assets/cld.jpg'),
+                    height: 240,
+                    fit: BoxFit.cover,
+                  ),
+                ],
               ),
               Container(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
-                      Color.fromARGB(255, 0, 119, 255),
-                      Color.fromARGB(255, 0, 255, 242)
+                      Color.fromARGB(255, 236, 179, 221),
+                      Color.fromARGB(255, 159, 152, 202)
                     ],
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
@@ -221,8 +227,8 @@ class _personalState extends State<personal> {
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
-                      Color.fromARGB(255, 0, 119, 255),
-                      Color.fromARGB(255, 0, 255, 242)
+                      Color.fromARGB(255, 236, 179, 221),
+                      Color.fromARGB(255, 159, 152, 202)
                     ],
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
@@ -283,8 +289,8 @@ class _personalState extends State<personal> {
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
-                      Color.fromARGB(255, 0, 119, 255),
-                      Color.fromARGB(255, 0, 255, 242)
+                      Color.fromARGB(255, 236, 179, 221),
+                      Color.fromARGB(255, 159, 152, 202)
                     ],
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
