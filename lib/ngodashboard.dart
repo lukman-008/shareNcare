@@ -1,42 +1,26 @@
-import 'dart:ui';
-
+import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/about.dart';
 import 'package:flutter_application_1/books.dart';
 import 'package:flutter_application_1/clothes.dart';
+import 'package:flutter_application_1/dashboard.dart';
 import 'package:flutter_application_1/food.dart';
-import 'package:flutter_application_1/main.dart';
+import 'package:flutter_application_1/foodfetch.dart';
 import 'package:flutter_application_1/help.dart';
+import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/money.dart';
 import 'package:flutter_application_1/ngo.dart';
-import 'package:flutter_application_1/ngodashboard.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
-class dashboard extends StatefulWidget {
-  const dashboard({super.key});
+class ngodashboard extends StatefulWidget {
+  const ngodashboard({super.key});
 
   @override
-  State<dashboard> createState() => _dashboardState();
+  State<ngodashboard> createState() => _ngodashboardState();
 }
 
-class _dashboardState extends State<dashboard> {
-  final user = FirebaseAuth.instance.currentUser!;
-  late final PageController pageController;
-  int pageno = 0;
-  @override
-  void initState() {
-    pageController = PageController();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    pageController.dispose();
-    super.dispose();
-  }
-
+class _ngodashboardState extends State<ngodashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -218,7 +202,7 @@ class _dashboardState extends State<dashboard> {
                   InkWell(
                     onTap: () {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => food()));
+                          MaterialPageRoute(builder: (context) => foodfetch()));
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -363,43 +347,6 @@ class _dashboardState extends State<dashboard> {
                       ),
                     ),
                   ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => ngo()));
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                              blurRadius: 8,
-                              color: Color.fromARGB(255, 172, 172, 172)),
-                        ],
-                        borderRadius: BorderRadius.circular(20),
-                        gradient: LinearGradient(colors: [
-                          Color.fromARGB(255, 255, 255, 255),
-                          Color.fromARGB(255, 255, 255, 255)
-                        ]),
-                      ),
-                      padding: EdgeInsets.all(20),
-                      child: Column(
-                        children: [
-                          Image.asset(
-                            "assets/ngos.jpg",
-                            scale: 4,
-                          ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          Text(
-                            "N.G.Os",
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
                 ],
               ),
             )
@@ -427,7 +374,7 @@ class _dashboardState extends State<dashboard> {
                       SizedBox(
                         height: 10,
                       ),
-                      Text("Email - " + user.email!)
+                      Text("Email - ")
                     ],
                   )),
               SizedBox(
@@ -440,10 +387,8 @@ class _dashboardState extends State<dashboard> {
                 ),
                 child: ListTile(
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: ((context) => ngodashboard())));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: ((context) => dashboard())));
                   },
                   leading: Icon(
                     Icons.person,

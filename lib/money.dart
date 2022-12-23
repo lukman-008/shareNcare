@@ -28,10 +28,51 @@ class _moneyState extends State<money> {
           child: SingleChildScrollView(
             child: Column(
               children: [
+                SizedBox(
+                  height: 30,
+                  child: Text(
+                    "PERSONAL DETAIL",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
                 TextFormField(
                   decoration: InputDecoration(
                       hintText: "NAME",
                       labelText: "ADD NAME/ORG. NAME",
+                      labelStyle: TextStyle(fontWeight: FontWeight.bold),
+                      fillColor: Colors.white,
+                      filled: true,
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10))),
+                  autofocus: false,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                TextFormField(
+                  decoration: InputDecoration(
+                      hintText: "CONTACT NUMBER",
+                      labelText: "CONTACT NUMBER",
+                      labelStyle: TextStyle(fontWeight: FontWeight.bold),
+                      fillColor: Colors.white,
+                      filled: true,
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10))),
+                  autofocus: false,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                TextFormField(
+                  decoration: InputDecoration(
+                      hintText: "EMAIL ADDRESS",
+                      labelText: "EMAIL ADDRESS",
                       labelStyle: TextStyle(fontWeight: FontWeight.bold),
                       fillColor: Colors.white,
                       filled: true,
