@@ -3,14 +3,17 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/about.dart';
+import 'package:flutter_application_1/bookfetch.dart';
 import 'package:flutter_application_1/books.dart';
 import 'package:flutter_application_1/clothes.dart';
+import 'package:flutter_application_1/clothesfetch.dart';
 import 'package:flutter_application_1/dashboard.dart';
 import 'package:flutter_application_1/food.dart';
 import 'package:flutter_application_1/foodfetch.dart';
 import 'package:flutter_application_1/help.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/money.dart';
+import 'package:flutter_application_1/moneyfetch.dart';
 import 'package:flutter_application_1/ngo.dart';
 
 class ngodashboard extends StatefulWidget {
@@ -238,8 +241,10 @@ class _ngodashboardState extends State<ngodashboard> {
                   ),
                   InkWell(
                     onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => clothes()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => clothesfetch()));
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -276,7 +281,7 @@ class _ngodashboardState extends State<ngodashboard> {
                   InkWell(
                     onTap: () {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => books()));
+                          MaterialPageRoute(builder: (context) => bookfetch()));
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -312,8 +317,10 @@ class _ngodashboardState extends State<ngodashboard> {
                   ),
                   InkWell(
                     onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => money()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => moneyfetch()));
                     },
                     child: Container(
                       decoration: BoxDecoration(

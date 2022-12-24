@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/foodremote_data.dart';
+import 'package:flutter_application_1/clothesremote_data.dart';
 import 'package:flutter_application_1/foomodel.dart';
 
-class foodfetch extends StatefulWidget {
-  const foodfetch({super.key});
+class clothesfetch extends StatefulWidget {
+  const clothesfetch({super.key});
 
   @override
-  State<foodfetch> createState() => _foodfetchState();
+  State<clothesfetch> createState() => _clothesfetchState();
 }
 
-class _foodfetchState extends State<foodfetch> {
+class _clothesfetchState extends State<clothesfetch> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text("FOOD SUPPLIES"),
+        title: Text("CLOTHES SUPPLIES"),
         flexibleSpace: Container(
           decoration: BoxDecoration(
             boxShadow: [BoxShadow(blurRadius: 20, color: Colors.black)],
@@ -28,7 +28,7 @@ class _foodfetchState extends State<foodfetch> {
         child: Column(
           children: [
             StreamBuilder<List<UserModel>>(
-                stream: FirestoreHelper.read(),
+                stream: FirestoreHelper1.read(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return Center(
@@ -49,6 +49,7 @@ class _foodfetchState extends State<foodfetch> {
                           itemBuilder: (context, index) {
                             final singleuser = userdata[index];
                             return Container(
+                              decoration: BoxDecoration(),
                               margin: EdgeInsets.only(
                                   top: 10, bottom: 7, left: 15, right: 15),
                               child: ListTile(

@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/foodremote_data.dart';
-import 'package:flutter_application_1/foomodel.dart';
+import 'package:flutter_application_1/moneymodel.dart';
+import 'package:flutter_application_1/moneyremote_data.dart';
 
-class foodfetch extends StatefulWidget {
-  const foodfetch({super.key});
+class moneyfetch extends StatefulWidget {
+  const moneyfetch({super.key});
 
   @override
-  State<foodfetch> createState() => _foodfetchState();
+  State<moneyfetch> createState() => _moneyfetchState();
 }
 
-class _foodfetchState extends State<foodfetch> {
+class _moneyfetchState extends State<moneyfetch> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text("FOOD SUPPLIES"),
+        title: Text("MONEY DONATED"),
         flexibleSpace: Container(
           decoration: BoxDecoration(
             boxShadow: [BoxShadow(blurRadius: 20, color: Colors.black)],
@@ -28,7 +28,7 @@ class _foodfetchState extends State<foodfetch> {
         child: Column(
           children: [
             StreamBuilder<List<UserModel>>(
-                stream: FirestoreHelper.read(),
+                stream: FirestoreHelper3.read(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return Center(
@@ -56,9 +56,8 @@ class _foodfetchState extends State<foodfetch> {
                                 title: Text("Name :- ${singleuser.name}" +
                                     "\nEmail :- ${singleuser.email}" +
                                     "\nContact :- ${singleuser.contact}" +
-                                    "\nAddress :- ${singleuser.address}" +
-                                    "\nQuantity :- ${singleuser.total}" +
-                                    "\nDescription :- ${singleuser.descr}"),
+                                    "\nTotal Figure :- ${singleuser.total}" +
+                                    "\nTransaction Id :- ${singleuser.transid}"),
                               ),
                             );
                           }),

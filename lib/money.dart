@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_application_1/moneymodel.dart';
+import 'package:flutter_application_1/moneyremote_data.dart';
+
 class money extends StatefulWidget {
   const money({super.key});
 
@@ -8,6 +11,11 @@ class money extends StatefulWidget {
 }
 
 class _moneyState extends State<money> {
+  TextEditingController name = TextEditingController();
+  TextEditingController contact = TextEditingController();
+  TextEditingController email = TextEditingController();
+  TextEditingController transid = TextEditingController();
+  TextEditingController total = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,6 +44,7 @@ class _moneyState extends State<money> {
                   ),
                 ),
                 TextFormField(
+                  controller: name,
                   decoration: InputDecoration(
                       hintText: "NAME",
                       labelText: "ADD NAME/ORG. NAME",
@@ -53,6 +62,7 @@ class _moneyState extends State<money> {
                   height: 10,
                 ),
                 TextFormField(
+                  controller: contact,
                   decoration: InputDecoration(
                       hintText: "CONTACT NUMBER",
                       labelText: "CONTACT NUMBER",
@@ -70,6 +80,7 @@ class _moneyState extends State<money> {
                   height: 10,
                 ),
                 TextFormField(
+                  controller: email,
                   decoration: InputDecoration(
                       hintText: "EMAIL ADDRESS",
                       labelText: "EMAIL ADDRESS",
@@ -96,6 +107,7 @@ class _moneyState extends State<money> {
                   height: 10,
                 ),
                 TextFormField(
+                  controller: total,
                   decoration: InputDecoration(
                       hintText: "ADD MONEY IN RS.",
                       labelText: "ADD FIGURE",
@@ -110,6 +122,7 @@ class _moneyState extends State<money> {
                   height: 20,
                 ),
                 TextFormField(
+                  controller: transid,
                   decoration: InputDecoration(
                       hintText: "TRANSACTION ID",
                       labelText: "ADD TRANSACTION ID",
@@ -132,7 +145,14 @@ class _moneyState extends State<money> {
                     borderRadius: BorderRadius.circular(30),
                   ),
                   child: MaterialButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      FirestoreHelper3.create((UserModel(
+                          name: name.text,
+                          contact: contact.text,
+                          email: email.text,
+                          total: total.text,
+                          transid: transid.text)));
+                    },
                     hoverColor: Colors.black,
                     padding: EdgeInsets.fromLTRB(70, 15, 70, 15),
                     child: Text(

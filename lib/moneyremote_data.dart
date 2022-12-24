@@ -1,24 +1,24 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_application_1/foomodel.dart';
+
+import 'package:flutter_application_1/moneymodel.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class FirestoreHelper2 {
+class FirestoreHelper3 {
   static Stream<List<UserModel>> read() {
-    final userCollection = FirebaseFirestore.instance.collection("Books");
+    final userCollection = FirebaseFirestore.instance.collection("money");
     return userCollection.snapshots().map((querySnapshot) =>
         querySnapshot.docs.map((e) => UserModel.fromSnapshot(e)).toList());
   }
 
   static Future create(UserModel user) async {
-    final userCollection = FirebaseFirestore.instance.collection("Books");
+    final userCollection = FirebaseFirestore.instance.collection("money");
     final docRef = userCollection.doc();
     final newUser = UserModel(
       name: user.name,
       contact: user.contact,
       email: user.email,
-      address: user.address,
       total: user.total,
-      descr: user.descr,
+      transid: user.transid,
     ).toJson();
     try {
       await docRef.set(newUser);

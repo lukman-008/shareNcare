@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/foodremote_data.dart';
+import 'package:flutter_application_1/booksremote_data.dart';
+import 'package:flutter_application_1/clothesremote_data.dart';
 import 'package:flutter_application_1/foomodel.dart';
 
-class foodfetch extends StatefulWidget {
-  const foodfetch({super.key});
+class bookfetch extends StatefulWidget {
+  const bookfetch({super.key});
 
   @override
-  State<foodfetch> createState() => _foodfetchState();
+  State<bookfetch> createState() => _bookfetchState();
 }
 
-class _foodfetchState extends State<foodfetch> {
+class _bookfetchState extends State<bookfetch> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text("FOOD SUPPLIES"),
+        title: Text("BOOK SUPPLIES"),
         flexibleSpace: Container(
           decoration: BoxDecoration(
             boxShadow: [BoxShadow(blurRadius: 20, color: Colors.black)],
@@ -28,7 +29,7 @@ class _foodfetchState extends State<foodfetch> {
         child: Column(
           children: [
             StreamBuilder<List<UserModel>>(
-                stream: FirestoreHelper.read(),
+                stream: FirestoreHelper2.read(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return Center(
