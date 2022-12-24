@@ -16,6 +16,15 @@ class _booksState extends State<books> {
   TextEditingController address = TextEditingController();
   TextEditingController total = TextEditingController();
   TextEditingController descr = TextEditingController();
+  final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+  checkvalidation(GlobalKey<FormState> _formkey) {
+    if (_formkey.currentState!.validate()) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,6 +54,12 @@ class _booksState extends State<books> {
               height: 10,
             ),
             TextFormField(
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return ("This Field Can't be Empty");
+                }
+              },
               controller: name,
               decoration: InputDecoration(
                   hintText: "NAME",
@@ -63,6 +78,12 @@ class _booksState extends State<books> {
               height: 10,
             ),
             TextFormField(
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return ("This Field Can't be Empty");
+                }
+              },
               controller: contact,
               decoration: InputDecoration(
                   hintText: "CONTACT NUMBER",
@@ -81,6 +102,18 @@ class _booksState extends State<books> {
               height: 10,
             ),
             TextFormField(
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return ("Please Enter Your Email");
+                }
+
+                if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+                    .hasMatch(value)) {
+                  return ("Please Enter a Valid Email");
+                }
+                return null;
+              },
               controller: email,
               decoration: InputDecoration(
                   hintText: "EMAIL ADDRESS",
@@ -96,6 +129,12 @@ class _booksState extends State<books> {
               height: 20,
             ),
             TextFormField(
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return ("This Field Can't be Empty");
+                }
+              },
               controller: address,
               minLines: 3,
               maxLines: 20,
@@ -125,6 +164,12 @@ class _booksState extends State<books> {
               height: 10,
             ),
             TextFormField(
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return ("This Field Can't be Empty");
+                }
+              },
               controller: total,
               decoration: InputDecoration(
                   hintText: "ADD NUMBER OF BOOKS",
@@ -140,6 +185,12 @@ class _booksState extends State<books> {
               height: 20,
             ),
             TextFormField(
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return ("This Field Can't be Empty");
+                }
+              },
               controller: descr,
               minLines: 3,
               maxLines: 20,
@@ -167,13 +218,15 @@ class _booksState extends State<books> {
               ),
               child: MaterialButton(
                 onPressed: () {
-                  FirestoreHelper2.create((UserModel(
-                      name: name.text,
-                      contact: contact.text,
-                      email: email.text,
-                      address: address.text,
-                      total: total.text,
-                      descr: descr.text)));
+                  if (checkvalidation(_formkey) == false) {
+                    FirestoreHelper2.create((UserModel(
+                        name: name.text,
+                        contact: contact.text,
+                        email: email.text,
+                        address: address.text,
+                        total: total.text,
+                        descr: descr.text)));
+                  }
                 },
                 hoverColor: Colors.black,
                 padding: EdgeInsets.fromLTRB(70, 15, 70, 15),

@@ -147,7 +147,7 @@ class _signupState extends State<signup> {
             }
           } catch (e) {
             print(e);
-            Fluttertoast.showToast(msg: "hello world");
+            Fluttertoast.showToast(msg: "Signed Up Successfully");
           }
         },
         hoverColor: Colors.black,
