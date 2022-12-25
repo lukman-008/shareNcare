@@ -2,10 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/dashboard.dart';
-import 'package:flutter_application_1/ngoLogin.dart';
 import 'package:flutter_application_1/ngodashboard.dart';
-import 'package:flutter_application_1/signup.dart';
-import 'package:flutter_application_1/splash.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lottie/lottie.dart';
 
@@ -15,24 +12,21 @@ void main() async {
   runApp(MaterialApp(
     title: "ShareNCare",
     debugShowCheckedModeBanner: false,
-    routes: {
-      "/": ((context) => splashScreen()),
-    },
   ));
 }
 
-class homepage extends StatefulWidget {
-  const homepage({super.key});
+class ngoLogin extends StatefulWidget {
+  const ngoLogin({super.key});
   Future<FirebaseApp> _initializeFirebase() async {
     FirebaseApp firebaseApp = await Firebase.initializeApp();
     return firebaseApp;
   }
 
   @override
-  State<homepage> createState() => _homepageState();
+  State<ngoLogin> createState() => _ngoLoginState();
 }
 
-class _homepageState extends State<homepage> {
+class _ngoLoginState extends State<ngoLogin> {
   static Future<User?> loginUsingEmailPassword(
       {required String email,
       required String password,
@@ -146,7 +140,7 @@ class _homepageState extends State<homepage> {
           print(user);
           if (user != null) {
             Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => dashboard()));
+                MaterialPageRoute(builder: (context) => ngodashboard()));
           }
         },
         hoverColor: Colors.black,
@@ -217,42 +211,6 @@ class _homepageState extends State<homepage> {
                           height: 5,
                         ),
                         button,
-                        Stack(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Text(
-                                    "  Not a member?",
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold),
-                                  ),
-                                  TextButton(
-                                      onPressed: () {
-                                        Navigator.pushReplacement(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    signup()));
-                                      },
-                                      child: Text(
-                                        "SignUp",
-                                        style: TextStyle(
-                                            color: Color.fromARGB(
-                                                255, 13, 80, 136),
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
-                                      )),
-                                ],
-                              ),
-                            ),
-                          ],
-                        )
                       ],
                     ),
                   ))),

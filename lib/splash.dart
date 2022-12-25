@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/logeduser.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:lottie/lottie.dart';
 
@@ -16,8 +17,8 @@ class _splashScreenState extends State<splashScreen> {
   void initState() {
     super.initState();
     Timer(Duration(seconds: 3), (() {
-      Navigator.of(context)
-          .pushReplacement(MaterialPageRoute(builder: (context) => homepage()));
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => loggeduser()));
     }));
   }
 

@@ -11,6 +11,7 @@ import 'package:flutter_application_1/dashboard.dart';
 import 'package:flutter_application_1/food.dart';
 import 'package:flutter_application_1/foodfetch.dart';
 import 'package:flutter_application_1/help.dart';
+import 'package:flutter_application_1/logeduser.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/money.dart';
 import 'package:flutter_application_1/moneyfetch.dart';
@@ -24,6 +25,7 @@ class ngodashboard extends StatefulWidget {
 }
 
 class _ngodashboardState extends State<ngodashboard> {
+  final user = FirebaseAuth.instance.currentUser!;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -381,34 +383,11 @@ class _ngodashboardState extends State<ngodashboard> {
                       SizedBox(
                         height: 10,
                       ),
-                      Text("Email - ")
+                      Text("Email - " + user.email!)
                     ],
                   )),
               SizedBox(
                 height: 20,
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      colors: [Colors.blue, Color.fromARGB(255, 3, 54, 96)]),
-                ),
-                child: ListTile(
-                  onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: ((context) => dashboard())));
-                  },
-                  leading: Icon(
-                    Icons.person,
-                    color: Colors.white,
-                  ),
-                  title: Text("Profile"),
-                ),
-              ),
-              SizedBox(
-                height: 5,
-              ),
-              SizedBox(
-                height: 5,
               ),
               Container(
                 decoration: BoxDecoration(
@@ -456,8 +435,10 @@ class _ngodashboardState extends State<ngodashboard> {
                         colors: [Colors.blue, Color.fromARGB(255, 3, 54, 96)])),
                 child: ListTile(
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: ((context) => homepage())));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: ((context) => loggeduser())));
                   },
                   leading: Icon(
                     Icons.logout_rounded,

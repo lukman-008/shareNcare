@@ -7,6 +7,7 @@ import 'package:flutter_application_1/about.dart';
 import 'package:flutter_application_1/books.dart';
 import 'package:flutter_application_1/clothes.dart';
 import 'package:flutter_application_1/food.dart';
+import 'package:flutter_application_1/logeduser.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/help.dart';
 import 'package:flutter_application_1/money.dart';
@@ -440,31 +441,6 @@ class _dashboardState extends State<dashboard> {
                 ),
                 child: ListTile(
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: ((context) => ngodashboard())));
-                  },
-                  leading: Icon(
-                    Icons.person,
-                    color: Colors.white,
-                  ),
-                  title: Text("Profile"),
-                ),
-              ),
-              SizedBox(
-                height: 5,
-              ),
-              SizedBox(
-                height: 5,
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      colors: [Colors.blue, Color.fromARGB(255, 3, 54, 96)]),
-                ),
-                child: ListTile(
-                  onTap: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: ((context) => help())));
                   },
@@ -504,8 +480,10 @@ class _dashboardState extends State<dashboard> {
                         colors: [Colors.blue, Color.fromARGB(255, 3, 54, 96)])),
                 child: ListTile(
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: ((context) => homepage())));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: ((context) => loggeduser())));
                   },
                   leading: Icon(
                     Icons.logout_rounded,
