@@ -8,6 +8,7 @@ import 'package:flutter_application_1/books.dart';
 import 'package:flutter_application_1/clothes.dart';
 import 'package:flutter_application_1/clothesfetch.dart';
 import 'package:flutter_application_1/dashboard.dart';
+import 'package:flutter_application_1/email.dart';
 import 'package:flutter_application_1/food.dart';
 import 'package:flutter_application_1/foodfetch.dart';
 import 'package:flutter_application_1/help.dart';
@@ -349,6 +350,43 @@ class _ngodashboardState extends State<ngodashboard> {
                           ),
                           Text(
                             "MONEY",
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => email()));
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                              blurRadius: 8,
+                              color: Color.fromARGB(255, 172, 172, 172)),
+                        ],
+                        borderRadius: BorderRadius.circular(20),
+                        gradient: LinearGradient(colors: [
+                          Color.fromARGB(255, 255, 255, 255),
+                          Color.fromARGB(255, 255, 255, 255)
+                        ]),
+                      ),
+                      padding: EdgeInsets.all(20),
+                      child: Column(
+                        children: [
+                          Image.asset(
+                            "assets/req.png",
+                            scale: 3.5,
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            "REQUEST",
                             style: TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold),
                           )

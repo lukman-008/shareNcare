@@ -1,6 +1,9 @@
+import 'dart:ui';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/auth_service.dart';
 import 'package:flutter_application_1/dashboard.dart';
 import 'package:flutter_application_1/ngoLogin.dart';
 import 'package:flutter_application_1/ngodashboard.dart';
@@ -184,7 +187,7 @@ class _homepageState extends State<homepage> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         SizedBox(
-                          height: 30,
+                          height: 25,
                           child: Text(
                             "LOGIN",
                             style: TextStyle(
@@ -217,6 +220,21 @@ class _homepageState extends State<homepage> {
                           height: 5,
                         ),
                         button,
+                        SizedBox(
+                          height: 5,
+                        ),
+                        InkWell(
+                          child: Container(
+                            height: 40,
+                            width: 40,
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    image: AssetImage("assets/google.png"))),
+                          ),
+                          onTap: () {
+                            AuthService().signInWithGoogle();
+                          },
+                        ),
                         Stack(
                           children: [
                             Padding(

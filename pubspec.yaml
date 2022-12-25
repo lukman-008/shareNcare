@@ -49,6 +49,7 @@ dependencies:
   dio: ^4.0.0
   flutter_svg: ^1.1.0
   expandable: ^5.0.1
+  google_sign_in: ^5.2.1
 
 dev_dependencies:
   flutter_test:

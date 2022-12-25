@@ -74,7 +74,7 @@ class _ngoLoginState extends State<ngoLogin> {
             return ("Please Enter Your Email");
           }
 
-          if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+          if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]+.[a-z]")
               .hasMatch(value)) {
             return ("Please Enter a Valid Email");
           }
