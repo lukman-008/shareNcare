@@ -233,6 +233,10 @@ class _homepageState extends State<homepage> {
                           ),
                           onTap: () {
                             AuthService().signInWithGoogle();
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: ((context) => dashboard())));
                           },
                         ),
                         Stack(

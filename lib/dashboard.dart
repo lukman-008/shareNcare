@@ -4,6 +4,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/about.dart';
+import 'package:flutter_application_1/auth_service.dart';
 import 'package:flutter_application_1/books.dart';
 import 'package:flutter_application_1/clothes.dart';
 import 'package:flutter_application_1/food.dart';
@@ -480,10 +481,9 @@ class _dashboardState extends State<dashboard> {
                         colors: [Colors.blue, Color.fromARGB(255, 3, 54, 96)])),
                 child: ListTile(
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: ((context) => loggeduser())));
+                    AuthService().signOut();
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: ((context) => homepage())));
                   },
                   leading: Icon(
                     Icons.logout_rounded,
