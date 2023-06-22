@@ -128,9 +128,9 @@ class _emailState extends State<email> {
   }
 
   Future SendEmail() async {
-    const serviceId = 'service_7mo9fti';
-    const templateId = 'template_96vislh';
-    const userId = 'Ux-6F5eAgrfsS3IpM';
+    const serviceId = 'service_uc1ugq6';
+    const templateId = 'template_msm99gg';
+    const userId = '_Pfmg0CjH8HNbemws';
     final url = Uri.parse("https://api.emailjs.com/api/v1.0/email/send");
 
     final response = await http.post(url,
@@ -146,8 +146,8 @@ class _emailState extends State<email> {
             "template_params": {
               "to_name": nameController.text,
               "from_name": nameController1.text,
-              "user_subject": subjectContoller.text,
-              "user_message": messageController.text,
+              "subject": subjectContoller.text,
+              "message": messageController.text,
               "to_email": emailContoller.text,
             }
           },
