@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/moneymodel.dart';
 import 'package:flutter_application_1/moneyremote_data.dart';
+import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
 class moneyfetch extends StatefulWidget {
   const moneyfetch({super.key});
@@ -10,12 +11,16 @@ class moneyfetch extends StatefulWidget {
 }
 
 class _moneyfetchState extends State<moneyfetch> {
+  Future<void> _handlerefresh() async {
+    return await Future.delayed(Duration(milliseconds: 500));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text("MONEY DONATED"),
+        title: Text("BOOK SUPPLIES"),
         flexibleSpace: Container(
           decoration: BoxDecoration(
             boxShadow: [BoxShadow(blurRadius: 20, color: Colors.black)],
@@ -24,48 +29,248 @@ class _moneyfetchState extends State<moneyfetch> {
           ),
         ),
       ),
-      body: Container(
-        child: Column(
-          children: [
-            StreamBuilder<List<UserModel>>(
-                stream: FirestoreHelper3.read(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
-                  if (snapshot.hasError) {
-                    return Center(
-                      child: Text("some error occured"),
-                    );
-                  }
-                  if (snapshot.hasData) {
-                    final userdata = snapshot.data;
+      body: LiquidPullToRefresh(
+        onRefresh: _handlerefresh,
+        color: Colors.blue,
+        height: 200,
+        animSpeedFactor: 5,
+        backgroundColor: Color.fromARGB(255, 237, 255, 255),
+        child: Container(
+          child: Padding(
+            padding: const EdgeInsets.only(left: 15.0, right: 15, top: 20),
+            child: Column(
+              children: [
+                StreamBuilder<List<UserModel>>(
+                    stream: FirestoreHelper3.read(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                      if (snapshot.hasError) {
+                        return Center(
+                          child: Text("some error occured"),
+                        );
+                      }
+                      if (snapshot.hasData) {
+                        final userdata = snapshot.data;
 
-                    return Expanded(
-                      child: ListView.builder(
-                          itemCount: userdata!.length,
-                          itemBuilder: (context, index) {
-                            final singleuser = userdata[index];
-                            return Container(
-                              margin: EdgeInsets.only(
-                                  top: 10, bottom: 7, left: 15, right: 15),
-                              child: ListTile(
-                                tileColor: Color.fromARGB(255, 220, 217, 217),
-                                title: Text("Name :- ${singleuser.name}" +
-                                    "\nEmail :- ${singleuser.email}" +
-                                    "\nContact :- ${singleuser.contact}" +
-                                    "\nTotal Figure :- ${singleuser.total}" +
-                                    "\nTransaction Id :- ${singleuser.transid}"),
-                              ),
-                            );
-                          }),
-                    );
-                  }
-                  return Center(child: CircularProgressIndicator());
-                }),
-          ],
+                        return Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(2.0),
+                            child: ListView.builder(
+                                itemCount: userdata!.length,
+                                itemBuilder: (context, index) {
+                                  final singleUser = userdata[index];
+                                  return Container(
+                                    decoration: BoxDecoration(
+                                      boxShadow: [
+                                        BoxShadow(
+                                            blurRadius: 6,
+                                            color:
+                                                Color.fromARGB(255, 0, 0, 0)),
+                                      ],
+                                      gradient: LinearGradient(
+                                        colors: [
+                                          Color.fromARGB(255, 255, 245, 250),
+                                          Color.fromARGB(255, 255, 245, 250),
+                                        ],
+                                        begin: Alignment.topCenter,
+                                        end: Alignment.bottomCenter,
+                                      ),
+                                    ),
+                                    child: FittedBox(
+                                      child: Column(
+                                        children: [
+                                          DataTable(
+                                            dataRowColor: MaterialStateProperty
+                                                .resolveWith<Color?>(
+                                                    (Set<MaterialState>
+                                                        states) {
+                                              if (states.contains(
+                                                  MaterialState.selected))
+                                                return Theme.of(context)
+                                                    .colorScheme
+                                                    .primary
+                                                    .withOpacity(0.08);
+                                              return Color.fromRGBO(
+                                                  228,
+                                                  228,
+                                                  228,
+                                                  0.722); // Use the default value.
+                                            }),
+                                            headingRowColor:
+                                                MaterialStateProperty
+                                                    .resolveWith<Color?>(
+                                                        (Set<MaterialState>
+                                                            states) {
+                                              if (states.contains(
+                                                  MaterialState.selected))
+                                                return Theme.of(context)
+                                                    .colorScheme
+                                                    .primary
+                                                    .withOpacity(0.08);
+                                              return Color.fromARGB(
+                                                  255,
+                                                  201,
+                                                  220,
+                                                  254); // Use the default value.
+                                            }),
+                                            dataRowHeight: 180,
+                                            headingRowHeight: 100,
+                                            border: TableBorder.all(width: 2),
+                                            columns: <DataColumn>[
+                                              DataColumn(
+                                                label: Text(
+                                                  'Name',
+                                                  style: TextStyle(
+                                                      fontSize: 30,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ),
+                                              DataColumn(
+                                                label: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    children: [
+                                                      Text(
+                                                        "${singleUser.name}" +
+                                                            "                                                                ",
+                                                        style: TextStyle(
+                                                            fontSize: 30,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      ),
+                                                    ]),
+                                                numeric: true,
+                                              ),
+                                            ],
+                                            rows: <DataRow>[
+                                              DataRow(
+                                                cells: <DataCell>[
+                                                  DataCell(Text(
+                                                    "Contact",
+                                                    style: TextStyle(
+                                                        fontSize: 26,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )),
+                                                  DataCell(Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    children: [
+                                                      Text(
+                                                        "${singleUser.contact}",
+                                                        style: TextStyle(
+                                                            fontSize: 26,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      ),
+                                                    ],
+                                                  )),
+                                                ],
+                                              ),
+                                              DataRow(
+                                                cells: <DataCell>[
+                                                  DataCell(Text(
+                                                    "Email",
+                                                    style: TextStyle(
+                                                        fontSize: 26,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )),
+                                                  DataCell(Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    children: [
+                                                      Text(
+                                                        "${singleUser.email}",
+                                                        style: TextStyle(
+                                                            fontSize: 26,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      ),
+                                                    ],
+                                                  )),
+                                                ],
+                                              ),
+                                              DataRow(
+                                                cells: <DataCell>[
+                                                  DataCell(Text(
+                                                    "Total Figure",
+                                                    style: TextStyle(
+                                                        fontSize: 26,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )),
+                                                  DataCell(Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    children: [
+                                                      Text(
+                                                        "${singleUser.total}",
+                                                        style: TextStyle(
+                                                            fontSize: 26,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      ),
+                                                    ],
+                                                  )),
+                                                ],
+                                              ),
+                                              DataRow(
+                                                cells: <DataCell>[
+                                                  DataCell(Text(
+                                                    "Transaction Id",
+                                                    style: TextStyle(
+                                                        fontSize: 26,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )),
+                                                  DataCell(Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    children: [
+                                                      Text(
+                                                        "\n${singleUser.transid}\n ",
+                                                        style: TextStyle(
+                                                            fontSize: 26,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      ),
+                                                    ],
+                                                  )),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 40,
+                                            child: Container(
+                                              height: 30,
+                                              color: Colors.grey,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                }),
+                          ),
+                        );
+                      }
+                      return Center(child: CircularProgressIndicator());
+                    }),
+              ],
+            ),
+          ),
         ),
       ),
     );

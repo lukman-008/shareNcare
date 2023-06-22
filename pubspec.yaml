@@ -43,13 +43,12 @@ dependencies:
   cloud_firestore: ^4.0.5
   carousel_slider: ^4.1.1
   fluttertoast: ^8.0.9
-  google_maps_flutter: ^2.2.1
-  flutter_polyline_points: ^1.0.0
-  location: ^4.4.0
+  
   dio: ^4.0.0
   flutter_svg: ^1.1.0
   expandable: ^5.0.1
   google_sign_in: ^5.2.1
+  liquid_pull_to_refresh: ^3.0.1
 
 dev_dependencies:
   flutter_test:
