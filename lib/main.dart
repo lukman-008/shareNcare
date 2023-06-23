@@ -224,21 +224,20 @@ class _homepageState extends State<homepage> {
                           height: 5,
                         ),
                         InkWell(
-                          child: Container(
-                            height: 40,
-                            width: 40,
-                            decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    image: AssetImage("assets/google.png"))),
-                          ),
-                          onTap: () {
-                            AuthService().signInWithGoogle();
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: ((context) => dashboard())));
-                          },
-                        ),
+                            child: Container(
+                              height: 40,
+                              width: 40,
+                              decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                      image: AssetImage("assets/google.png"))),
+                            ),
+                            onTap: () {
+                              AuthService().googleLogin();
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: ((context) => dashboard())));
+                            }),
                         Stack(
                           children: [
                             Padding(
