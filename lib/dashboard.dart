@@ -14,10 +14,13 @@ import 'package:flutter_application_1/help.dart';
 import 'package:flutter_application_1/money.dart';
 import 'package:flutter_application_1/ngo.dart';
 import 'package:flutter_application_1/ngodashboard.dart';
+import 'package:flutter_application_1/userlogin.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class dashboard extends StatefulWidget {
-  const dashboard({super.key});
+  const dashboard();
 
   @override
   State<dashboard> createState() => _dashboardState();
@@ -83,7 +86,7 @@ class _dashboardState extends State<dashboard> {
                     ],
                     borderRadius: BorderRadius.circular(8.0),
                     image: DecorationImage(
-                      image: AssetImage('assets/snc.png'),
+                      image: AssetImage('assets/food waste.png'),
                       fit: BoxFit.fill,
                     ),
                   ),
@@ -423,7 +426,7 @@ class _dashboardState extends State<dashboard> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CircleAvatar(
-                        backgroundImage: AssetImage('assets/snc.png'),
+                        backgroundImage: getprofilepic(),
                         radius: 55,
                       ),
                       SizedBox(
@@ -480,8 +483,9 @@ class _dashboardState extends State<dashboard> {
                     gradient: LinearGradient(
                         colors: [Colors.blue, Color.fromARGB(255, 3, 54, 96)])),
                 child: ListTile(
-                  onTap: () {
-                    AuthService().signOut();
+                  onTap: () async {
+                    await GoogleSignIn().signOut();
+                    FirebaseAuth.instance.signOut();
                     Navigator.push(context,
                         MaterialPageRoute(builder: ((context) => homepage())));
                   },
@@ -491,12 +495,20 @@ class _dashboardState extends State<dashboard> {
                   ),
                   title: Text("Logout"),
                 ),
-              )
+              ),
             ],
           ),
         ),
       ),
     );
+  }
+
+  getprofilepic() {
+    if (user.photoURL == null) {
+      return Image.asset("assets/snc.png").image;
+    } else {
+      return Image.network(user.photoURL.toString()).image;
+    }
   }
 }
 
