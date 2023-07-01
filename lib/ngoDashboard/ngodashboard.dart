@@ -1,47 +1,33 @@
-import 'dart:ui';
-
+import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/about.dart';
-import 'package:flutter_application_1/auth_service.dart';
-import 'package:flutter_application_1/books.dart';
-import 'package:flutter_application_1/clothes.dart';
-import 'package:flutter_application_1/food.dart';
-import 'package:flutter_application_1/logeduser.dart';
+import 'package:flutter_application_1/about/about.dart';
+import 'package:flutter_application_1/fetch/bookfetch/bookfetch.dart';
+import 'package:flutter_application_1/firstscreen/splashscreen/splash.dart';
+import 'package:flutter_application_1/request/bookRequest/books.dart';
+import 'package:flutter_application_1/request/clothesRequest/clothes.dart';
+import 'package:flutter_application_1/fetch/clothesfetch/clothesfetch.dart';
+import 'package:flutter_application_1/userDashboard/dashboard.dart';
+import 'package:flutter_application_1/EmailDesk/email.dart';
+import 'package:flutter_application_1/request/foodrequest/food.dart';
+import 'package:flutter_application_1/fetch/foodfetch/foodfetch.dart';
+import 'package:flutter_application_1/helpdesk/help.dart';
+import 'package:flutter_application_1/firstscreen/logeduser.dart';
 import 'package:flutter_application_1/main.dart';
-import 'package:flutter_application_1/help.dart';
-import 'package:flutter_application_1/money.dart';
-import 'package:flutter_application_1/ngo.dart';
-import 'package:flutter_application_1/ngodashboard.dart';
-import 'package:flutter_application_1/userlogin.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+import 'package:flutter_application_1/request/moneyRequest/money.dart';
+import 'package:flutter_application_1/fetch/moneyfetch/moneyfetch.dart';
+import 'package:flutter_application_1/NgoFetch/ngo.dart';
 
-class dashboard extends StatefulWidget {
-  const dashboard();
+class ngodashboard extends StatefulWidget {
+  const ngodashboard({super.key});
 
   @override
-  State<dashboard> createState() => _dashboardState();
+  State<ngodashboard> createState() => _ngodashboardState();
 }
 
-class _dashboardState extends State<dashboard> {
+class _ngodashboardState extends State<ngodashboard> {
   final user = FirebaseAuth.instance.currentUser!;
-  late final PageController pageController;
-  int pageno = 0;
-  @override
-  void initState() {
-    pageController = PageController();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    pageController.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -86,7 +72,7 @@ class _dashboardState extends State<dashboard> {
                     ],
                     borderRadius: BorderRadius.circular(8.0),
                     image: DecorationImage(
-                      image: AssetImage('assets/food waste.png'),
+                      image: AssetImage('assets/snc.png'),
                       fit: BoxFit.fill,
                     ),
                   ),
@@ -223,7 +209,7 @@ class _dashboardState extends State<dashboard> {
                   InkWell(
                     onTap: () {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => food()));
+                          MaterialPageRoute(builder: (context) => foodfetch()));
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -259,8 +245,10 @@ class _dashboardState extends State<dashboard> {
                   ),
                   InkWell(
                     onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => clothes()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => clothesfetch()));
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -297,7 +285,7 @@ class _dashboardState extends State<dashboard> {
                   InkWell(
                     onTap: () {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => books()));
+                          MaterialPageRoute(builder: (context) => bookfetch()));
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -333,8 +321,10 @@ class _dashboardState extends State<dashboard> {
                   ),
                   InkWell(
                     onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => money()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => moneyfetch()));
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -371,7 +361,7 @@ class _dashboardState extends State<dashboard> {
                   InkWell(
                     onTap: () {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => ngo()));
+                          MaterialPageRoute(builder: (context) => email()));
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -390,14 +380,14 @@ class _dashboardState extends State<dashboard> {
                       child: Column(
                         children: [
                           Image.asset(
-                            "assets/ngos.jpg",
-                            scale: 4,
+                            "assets/req.png",
+                            scale: 3.5,
                           ),
                           SizedBox(
-                            height: 5,
+                            height: 10,
                           ),
                           Text(
-                            "N.G.Os",
+                            "REQUEST",
                             style: TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold),
                           )
@@ -426,7 +416,7 @@ class _dashboardState extends State<dashboard> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CircleAvatar(
-                        backgroundImage: getprofilepic(),
+                        backgroundImage: AssetImage('assets/snc.png'),
                         radius: 55,
                       ),
                       SizedBox(
@@ -483,11 +473,11 @@ class _dashboardState extends State<dashboard> {
                     gradient: LinearGradient(
                         colors: [Colors.blue, Color.fromARGB(255, 3, 54, 96)])),
                 child: ListTile(
-                  onTap: () async {
-                    await GoogleSignIn().signOut();
-                    FirebaseAuth.instance.signOut();
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: ((context) => homepage())));
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: ((context) => splashScreen())));
                   },
                   leading: Icon(
                     Icons.logout_rounded,
@@ -495,20 +485,12 @@ class _dashboardState extends State<dashboard> {
                   ),
                   title: Text("Logout"),
                 ),
-              ),
+              )
             ],
           ),
         ),
       ),
     );
-  }
-
-  getprofilepic() {
-    if (user.photoURL == null) {
-      return Image.asset("assets/snc.png").image;
-    } else {
-      return Image.network(user.photoURL.toString()).image;
-    }
   }
 }
 

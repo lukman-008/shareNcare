@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/dashboard.dart';
-import 'package:flutter_application_1/ngodashboard.dart';
+
+import 'package:flutter_application_1/ngoDashboard/ngodashboard.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lottie/lottie.dart';
 

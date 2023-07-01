@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/moneymodel.dart';
-import 'package:flutter_application_1/moneyremote_data.dart';
+import 'package:flutter_application_1/fetch/moneyfetch/moneymodel.dart';
+import 'package:flutter_application_1/fetch/moneyfetch/moneyremote_data.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
 class moneyfetch extends StatefulWidget {

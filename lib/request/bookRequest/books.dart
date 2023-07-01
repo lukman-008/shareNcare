@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/foodremote_data.dart';
-import 'package:flutter_application_1/foomodel.dart';
+import 'package:flutter_application_1/fetch/bookfetch/booksremote_data.dart';
+import 'package:flutter_application_1/fetch/foodfetch/foomodel.dart';
 
-class food extends StatefulWidget {
-  const food({super.key});
+class books extends StatefulWidget {
+  const books({super.key});
 
   @override
-  State<food> createState() => _foodState();
+  State<books> createState() => _booksState();
 }
 
-class _foodState extends State<food> {
+class _booksState extends State<books> {
   TextEditingController name = TextEditingController();
   TextEditingController contact = TextEditingController();
   TextEditingController email = TextEditingController();
@@ -30,7 +30,7 @@ class _foodState extends State<food> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text("Donate Food"),
+        title: Text("Donate Books"),
         flexibleSpace: Container(
           decoration: BoxDecoration(
             boxShadow: [BoxShadow(blurRadius: 20, color: Colors.black)],
@@ -52,6 +52,9 @@ class _foodState extends State<food> {
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
+              SizedBox(
+                height: 10,
+              ),
               TextFormField(
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 validator: (value) {
@@ -69,6 +72,9 @@ class _foodState extends State<food> {
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10))),
                 autofocus: false,
+              ),
+              SizedBox(
+                height: 10,
               ),
               SizedBox(
                 height: 10,
@@ -168,8 +174,8 @@ class _foodState extends State<food> {
                 },
                 controller: total,
                 decoration: InputDecoration(
-                    hintText: "ADD FOOD QUANTITY",
-                    labelText: "ADD TOTAL QUANTITY",
+                    hintText: "ADD NUMBER OF BOOKS",
+                    labelText: "TOTAL BOOKS",
                     labelStyle: TextStyle(fontWeight: FontWeight.bold),
                     fillColor: Colors.white,
                     filled: true,
@@ -193,7 +199,7 @@ class _foodState extends State<food> {
                 keyboardType: TextInputType.multiline,
                 decoration: InputDecoration(
                     hintText: "DESCRIPTION",
-                    labelText: "ADD COMLETE DESCRIPTION",
+                    labelText: "ADD DESCRIPTION OF ALL BOOKS",
                     labelStyle: TextStyle(fontWeight: FontWeight.bold),
                     fillColor: Colors.white,
                     filled: true,
@@ -215,7 +221,7 @@ class _foodState extends State<food> {
                 child: MaterialButton(
                   onPressed: () {
                     if (checkvalidation(_formkey) == false) {
-                      FirestoreHelper.create((UserModel(
+                      FirestoreHelper2.create((UserModel(
                           name: name.text,
                           contact: contact.text,
                           email: email.text,

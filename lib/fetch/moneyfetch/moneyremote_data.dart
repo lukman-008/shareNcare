@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import 'package:flutter_application_1/moneymodel.dart';
+import 'package:flutter_application_1/fetch/moneyfetch/moneymodel.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class FirestoreHelper3 {

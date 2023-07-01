@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_application_1/foomodel.dart';
+import 'package:flutter_application_1/fetch/foodfetch/foomodel.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class FirestoreHelper1 {

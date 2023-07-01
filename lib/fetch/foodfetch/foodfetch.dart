@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/foodremote_data.dart';
-import 'package:flutter_application_1/foomodel.dart';
+import 'package:flutter_application_1/fetch/foodfetch/foodremote_data.dart';
+import 'package:flutter_application_1/fetch/foodfetch/foomodel.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
 class foodfetch extends StatefulWidget {

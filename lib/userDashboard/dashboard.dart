@@ -1,32 +1,48 @@
-import 'package:carousel_slider/carousel_options.dart';
+import 'dart:ui';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/about.dart';
-import 'package:flutter_application_1/bookfetch.dart';
-import 'package:flutter_application_1/books.dart';
-import 'package:flutter_application_1/clothes.dart';
-import 'package:flutter_application_1/clothesfetch.dart';
-import 'package:flutter_application_1/dashboard.dart';
-import 'package:flutter_application_1/email.dart';
-import 'package:flutter_application_1/food.dart';
-import 'package:flutter_application_1/foodfetch.dart';
-import 'package:flutter_application_1/help.dart';
-import 'package:flutter_application_1/logeduser.dart';
+import 'package:flutter_application_1/about/about.dart';
+import 'package:flutter_application_1/firstscreen/splashscreen/splash.dart';
+import 'package:flutter_application_1/loginuser/auth_service.dart';
+import 'package:flutter_application_1/request/bookRequest/books.dart';
+import 'package:flutter_application_1/request/clothesRequest/clothes.dart';
+import 'package:flutter_application_1/request/foodrequest/food.dart';
+import 'package:flutter_application_1/firstscreen/logeduser.dart';
 import 'package:flutter_application_1/main.dart';
-import 'package:flutter_application_1/money.dart';
-import 'package:flutter_application_1/moneyfetch.dart';
-import 'package:flutter_application_1/ngo.dart';
+import 'package:flutter_application_1/helpdesk/help.dart';
+import 'package:flutter_application_1/request/moneyRequest/money.dart';
+import 'package:flutter_application_1/NgoFetch/ngo.dart';
+import 'package:flutter_application_1/ngoDashboard/ngodashboard.dart';
+import 'package:flutter_application_1/loginuser/userlogin.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
-class ngodashboard extends StatefulWidget {
-  const ngodashboard({super.key});
+class dashboard extends StatefulWidget {
+  const dashboard();
 
   @override
-  State<ngodashboard> createState() => _ngodashboardState();
+  State<dashboard> createState() => _dashboardState();
 }
 
-class _ngodashboardState extends State<ngodashboard> {
+class _dashboardState extends State<dashboard> {
   final user = FirebaseAuth.instance.currentUser!;
+  late final PageController pageController;
+  int pageno = 0;
+  @override
+  void initState() {
+    pageController = PageController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    pageController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -208,7 +224,7 @@ class _ngodashboardState extends State<ngodashboard> {
                   InkWell(
                     onTap: () {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => foodfetch()));
+                          MaterialPageRoute(builder: (context) => food()));
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -244,10 +260,8 @@ class _ngodashboardState extends State<ngodashboard> {
                   ),
                   InkWell(
                     onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => clothesfetch()));
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => clothes()));
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -284,7 +298,7 @@ class _ngodashboardState extends State<ngodashboard> {
                   InkWell(
                     onTap: () {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => bookfetch()));
+                          MaterialPageRoute(builder: (context) => books()));
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -320,10 +334,8 @@ class _ngodashboardState extends State<ngodashboard> {
                   ),
                   InkWell(
                     onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => moneyfetch()));
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => money()));
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -360,7 +372,7 @@ class _ngodashboardState extends State<ngodashboard> {
                   InkWell(
                     onTap: () {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => email()));
+                          MaterialPageRoute(builder: (context) => ngo()));
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -379,14 +391,14 @@ class _ngodashboardState extends State<ngodashboard> {
                       child: Column(
                         children: [
                           Image.asset(
-                            "assets/req.png",
-                            scale: 3.5,
+                            "assets/ngos.jpg",
+                            scale: 4,
                           ),
                           SizedBox(
-                            height: 10,
+                            height: 5,
                           ),
                           Text(
-                            "REQUEST",
+                            "N.G.Os",
                             style: TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold),
                           )
@@ -415,7 +427,7 @@ class _ngodashboardState extends State<ngodashboard> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CircleAvatar(
-                        backgroundImage: AssetImage('assets/snc.png'),
+                        backgroundImage: getprofilepic(),
                         radius: 55,
                       ),
                       SizedBox(
@@ -472,11 +484,13 @@ class _ngodashboardState extends State<ngodashboard> {
                     gradient: LinearGradient(
                         colors: [Colors.blue, Color.fromARGB(255, 3, 54, 96)])),
                 child: ListTile(
-                  onTap: () {
+                  onTap: () async {
+                    await GoogleSignIn().signOut();
+                    FirebaseAuth.instance.signOut();
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: ((context) => loggeduser())));
+                            builder: ((context) => splashScreen())));
                   },
                   leading: Icon(
                     Icons.logout_rounded,
@@ -484,12 +498,20 @@ class _ngodashboardState extends State<ngodashboard> {
                   ),
                   title: Text("Logout"),
                 ),
-              )
+              ),
             ],
           ),
         ),
       ),
     );
+  }
+
+  getprofilepic() {
+    if (user.photoURL == null) {
+      return Image.asset("assets/snc.png").image;
+    } else {
+      return Image.network(user.photoURL.toString()).image;
+    }
   }
 }
 

@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/booksremote_data.dart';
-import 'package:flutter_application_1/clothesremote_data.dart';
-import 'package:flutter_application_1/foodremote_data.dart';
-import 'package:flutter_application_1/foomodel.dart';
+import 'package:flutter_application_1/fetch/clothesfetch/clothesremote_data.dart';
+import 'package:flutter_application_1/fetch/foodfetch/foomodel.dart';
+
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
-class bookfetch extends StatefulWidget {
-  const bookfetch({super.key});
+class clothesfetch extends StatefulWidget {
+  const clothesfetch({super.key});
 
   @override
-  State<bookfetch> createState() => _bookfetchState();
+  State<clothesfetch> createState() => _clothesfetchState();
 }
 
-class _bookfetchState extends State<bookfetch> {
+class _clothesfetchState extends State<clothesfetch> {
   Future<void> _handlerefresh() async {
     return await Future.delayed(Duration(milliseconds: 500));
   }
@@ -22,7 +21,7 @@ class _bookfetchState extends State<bookfetch> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text("BOOK SUPPLIES"),
+        title: Text("CLOTHES SUPPLIES"),
         flexibleSpace: Container(
           decoration: BoxDecoration(
             boxShadow: [BoxShadow(blurRadius: 20, color: Colors.black)],
@@ -43,7 +42,7 @@ class _bookfetchState extends State<bookfetch> {
             child: Column(
               children: [
                 StreamBuilder<List<UserModel>>(
-                    stream: FirestoreHelper2.read(),
+                    stream: FirestoreHelper1.read(),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return Center(

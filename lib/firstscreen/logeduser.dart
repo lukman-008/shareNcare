@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
-import 'package:flutter_application_1/ngoLogin.dart';
-import 'package:flutter_application_1/userlogin.dart';
+import 'package:flutter_application_1/loginNgo/ngoLogin.dart';
+import 'package:flutter_application_1/loginuser/userlogin.dart';
 import 'package:lottie/lottie.dart';
 
 class loggeduser extends StatefulWidget {

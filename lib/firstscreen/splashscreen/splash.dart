@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/logeduser.dart';
+import 'package:flutter_application_1/firstscreen/logeduser.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:lottie/lottie.dart';
 

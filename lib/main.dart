@@ -3,13 +3,14 @@ import 'dart:ui';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/auth_service.dart';
-import 'package:flutter_application_1/dashboard.dart';
-import 'package:flutter_application_1/ngoLogin.dart';
-import 'package:flutter_application_1/ngodashboard.dart';
-import 'package:flutter_application_1/signup.dart';
-import 'package:flutter_application_1/splash.dart';
-import 'package:flutter_application_1/userlogin.dart';
+import 'package:flutter_application_1/loginuser/auth_service.dart';
+import 'package:flutter_application_1/userDashboard/dashboard.dart';
+import 'package:flutter_application_1/firstscreen/logeduser.dart';
+import 'package:flutter_application_1/loginNgo/ngoLogin.dart';
+import 'package:flutter_application_1/ngoDashboard/ngodashboard.dart';
+import 'package:flutter_application_1/loginuser/signup.dart';
+import 'package:flutter_application_1/firstscreen/splashscreen/splash.dart';
+import 'package:flutter_application_1/loginuser/userlogin.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:lottie/lottie.dart';
@@ -27,7 +28,7 @@ void main() async {
         }
         if (snapshot.connectionState == ConnectionState.active) {
           if (snapshot.data == null) {
-            return homepage();
+            return splashScreen();
           } else {
             return dashboard();
           }

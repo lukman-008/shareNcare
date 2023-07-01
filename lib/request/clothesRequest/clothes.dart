@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/booksremote_data.dart';
-import 'package:flutter_application_1/foomodel.dart';
+import 'package:flutter_application_1/fetch/clothesfetch/clothesremote_data.dart';
+import 'package:flutter_application_1/fetch/foodfetch/foomodel.dart';
 
-class books extends StatefulWidget {
-  const books({super.key});
+class clothes extends StatefulWidget {
+  const clothes({super.key});
 
   @override
-  State<books> createState() => _booksState();
+  State<clothes> createState() => _clothesState();
 }
 
-class _booksState extends State<books> {
+class _clothesState extends State<clothes> {
   TextEditingController name = TextEditingController();
   TextEditingController contact = TextEditingController();
   TextEditingController email = TextEditingController();
@@ -30,7 +30,7 @@ class _booksState extends State<books> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text("Donate Books"),
+        title: Text("Donate Clothes"),
         flexibleSpace: Container(
           decoration: BoxDecoration(
             boxShadow: [BoxShadow(blurRadius: 20, color: Colors.black)],
@@ -51,9 +51,6 @@ class _booksState extends State<books> {
                   "PERSONAL DETAIL",
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
-              ),
-              SizedBox(
-                height: 10,
               ),
               TextFormField(
                 autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -174,8 +171,8 @@ class _booksState extends State<books> {
                 },
                 controller: total,
                 decoration: InputDecoration(
-                    hintText: "ADD NUMBER OF BOOKS",
-                    labelText: "TOTAL BOOKS",
+                    hintText: "ADD QUANTITY",
+                    labelText: "NO. OF CLOTHES",
                     labelStyle: TextStyle(fontWeight: FontWeight.bold),
                     fillColor: Colors.white,
                     filled: true,
@@ -199,7 +196,7 @@ class _booksState extends State<books> {
                 keyboardType: TextInputType.multiline,
                 decoration: InputDecoration(
                     hintText: "DESCRIPTION",
-                    labelText: "ADD DESCRIPTION OF ALL BOOKS",
+                    labelText: "ADD COMPLETE DESCRIPTION",
                     labelStyle: TextStyle(fontWeight: FontWeight.bold),
                     fillColor: Colors.white,
                     filled: true,
@@ -221,7 +218,7 @@ class _booksState extends State<books> {
                 child: MaterialButton(
                   onPressed: () {
                     if (checkvalidation(_formkey) == false) {
-                      FirestoreHelper2.create((UserModel(
+                      FirestoreHelper1.create((UserModel(
                           name: name.text,
                           contact: contact.text,
                           email: email.text,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_application_1/moneymodel.dart';
-import 'package:flutter_application_1/moneyremote_data.dart';
+import 'package:flutter_application_1/fetch/moneyfetch/moneymodel.dart';
+import 'package:flutter_application_1/fetch/moneyfetch/moneyremote_data.dart';
 
 class money extends StatefulWidget {
   const money({super.key});
